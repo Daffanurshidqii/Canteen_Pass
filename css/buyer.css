@@ -1,0 +1,29 @@
+.seller-fab{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:max(14px, calc(50% - 240px + 14px));width:44px;height:44px;border-radius:15px;background:#2A2200;color:#FFD84D;display:grid;place-items:center;font-size:21px;border:0;cursor:pointer;z-index:30;box-shadow:0 6px 16px rgba(0,0,0,.28)}
+.seller-fab:active{transform:scale(.92)}
+.logo{width:92px;height:92px;margin:0 auto 14px;background:#fff;border-radius:28px;display:grid;place-items:center;font-size:48px;box-shadow:0 10px 24px rgba(120,80,0,.25);transform:rotate(-6deg);position:relative;z-index:1}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.how div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 6px;text-align:center;font-size:12px;font-weight:600}
+.how b{display:block;font-size:26px;margin-bottom:4px}
+.floor{display:flex;align-items:center;gap:14px;cursor:pointer;transition:.15s}.floor:active{transform:scale(.98)}
+.floor .n{width:54px;height:54px;border-radius:18px;background:var(--y);display:grid;place-items:center;font-weight:800;font-size:22px;color:#2A2200}
+.floor small,.mute{color:var(--mute)}.floor b{font-size:16px}.floor .go{margin-left:auto;font-size:22px;color:var(--mute)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.m{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 10px;text-align:center;cursor:pointer;position:relative}
+.m.off{opacity:.5;cursor:default;filter:grayscale(.6)}.m .e{font-size:38px;background:var(--y2);width:70px;height:70px;border-radius:22px;display:grid;place-items:center;margin:0 auto 8px}
+.m b{display:block;font-size:14px}.m small{color:var(--mute);font-size:11px}
+.row{display:flex;gap:12px;align-items:center;padding:12px;background:var(--card);border:1px solid var(--line);border-radius:20px;margin-bottom:10px}
+.row .e{font-size:32px;width:60px;height:60px;border-radius:18px;background:var(--y2);display:grid;place-items:center;flex:none}
+.row .i{flex:1;min-width:0}.row b{display:block;font-size:14px}.row small{display:block;color:var(--mute);font-size:12px}.row .p{font-weight:700;margin-top:2px}
+.q{display:flex;align-items:center;gap:8px}.q button{width:32px;height:32px;border-radius:12px;border:0;background:var(--y);color:#2A2200;font:800 18px 'Poppins',sans-serif;cursor:pointer}.q button.mn{background:var(--line);color:var(--ink)}.q span{min-width:16px;text-align:center;font-weight:700}
+.qrbox{background:#fff;border-radius:24px;padding:18px;margin:8px auto;width:250px;box-shadow:0 10px 30px rgba(120,80,0,.15);border:3px solid var(--y);position:relative}
+.qrbox svg{width:100%;display:block}.qrbox .tag{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);background:#2A2200;color:#FFD84D;padding:4px 16px;border-radius:99px;font-weight:700;font-size:12px}
+.tm{font-size:38px;font-weight:800;color:var(--bad);text-align:center;margin:26px 0 2px;font-variant-numeric:tabular-nums}
+.no{font-size:52px;font-weight:800;text-align:center;letter-spacing:2px;background:var(--y);color:#2A2200;border-radius:24px;padding:12px;margin:6px 0 4px;animation:pop .5s}
+.steps{display:flex;justify-content:space-between;margin:18px 4px 6px;position:relative}
+.steps:before{content:"";position:absolute;top:15px;left:12%;right:12%;height:4px;background:var(--line)}
+.st{position:relative;text-align:center;flex:1;font-size:12px;font-weight:600;color:var(--mute)}.st i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--line);margin:0 auto 6px;font-style:normal;font-size:15px;position:relative}
+.st.on{color:var(--ink)}.st.on i{background:var(--y);animation:pulse 1.6s infinite}.st.dn i{background:var(--ok);color:#fff}
+.done{background:#DDF5E6;color:#0f6b3a;border-radius:20px;padding:16px;text-align:center;font-weight:600;animation:pop .5s}.done b{display:block;font-size:20px}
+.seller-fab{text-decoration:none}
+.est{background:var(--y2);border:2px solid var(--y);border-radius:20px;padding:14px;text-align:center;font-weight:700;margin-top:14px}
+.stk{margin-left:6px}
