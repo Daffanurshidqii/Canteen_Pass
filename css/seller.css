@@ -6,3 +6,12 @@
 .note{background:#FFE2B8;color:#7A3E00;border-radius:12px;padding:10px 12px;margin:6px 0;font-weight:600;font-size:14px}
 .rev{border-left:6px solid var(--y)}.rev .s{color:#E0A100;letter-spacing:2px}
 .rate{font-weight:700;position:relative;z-index:1;margin-top:6px}
+
+.tab{font-size:13px;padding:10px 4px}
+.est-box{background:var(--y2);border-radius:14px;padding:10px;margin:8px 0}
+.chips{display:flex;gap:6px;margin-top:6px}.chip{flex:1;border:2px solid var(--y);background:var(--card);color:var(--ink);border-radius:12px;padding:8px 0;font:700 13px 'Poppins',sans-serif;cursor:pointer}.chip.on{background:var(--y);box-shadow:0 3px 0 #D99E00}
+.stk-row{display:flex;gap:12px;align-items:center;padding:12px;background:var(--card);border:1px solid var(--line);border-radius:20px;margin-bottom:10px}
+.stk-row .e{font-size:30px;width:54px;height:54px;border-radius:16px;background:var(--y2);display:grid;place-items:center;flex:none}
+.stk-row .i{flex:1;min-width:0}.stk-row b{display:block;font-size:14px}.stk-row small{color:var(--mute);font-size:12px}
+.q{display:flex;align-items:center;gap:6px}.q button{width:34px;height:34px;border-radius:12px;border:0;background:var(--y);color:#2A2200;font:800 18px 'Poppins',sans-serif;cursor:pointer}.q button.mn{background:var(--line)}
+.stk-row input{width:60px;padding:8px 4px;text-align:center;font-weight:700}

@@ -1,5 +1,3 @@
-.seller-fab{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:max(14px, calc(50% - 240px + 14px));width:44px;height:44px;border-radius:15px;background:#2A2200;color:#FFD84D;display:grid;place-items:center;font-size:21px;border:0;cursor:pointer;z-index:30;box-shadow:0 6px 16px rgba(0,0,0,.28)}
-.seller-fab:active{transform:scale(.92)}
 .logo{width:92px;height:92px;margin:0 auto 14px;background:#fff;border-radius:28px;display:grid;place-items:center;font-size:48px;box-shadow:0 10px 24px rgba(120,80,0,.25);transform:rotate(-6deg);position:relative;z-index:1}
 .how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
 .how div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 6px;text-align:center;font-size:12px;font-weight:600}
@@ -24,6 +22,5 @@
 .st{position:relative;text-align:center;flex:1;font-size:12px;font-weight:600;color:var(--mute)}.st i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--line);margin:0 auto 6px;font-style:normal;font-size:15px;position:relative}
 .st.on{color:var(--ink)}.st.on i{background:var(--y);animation:pulse 1.6s infinite}.st.dn i{background:var(--ok);color:#fff}
 .done{background:#DDF5E6;color:#0f6b3a;border-radius:20px;padding:16px;text-align:center;font-weight:600;animation:pop .5s}.done b{display:block;font-size:20px}
-.seller-fab{text-decoration:none}
 .est{background:var(--y2);border:2px solid var(--y);border-radius:20px;padding:14px;text-align:center;font-weight:700;margin-top:14px}
 .stk{margin-left:6px}

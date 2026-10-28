@@ -11,8 +11,6 @@ function loadStore(){try{const s=localStorage.getItem(K);if(s){const d=JSON.pars
 function saveStore(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
 let S=loadStore();
 const avgRating=()=>S.reviews.length?S.reviews.reduce((a,x)=>a+x.rating,0)/S.reviews.length:0;
-// estimasi = (antrean di depan × 3 menit) + 5 menit
-const estMin=o=>S.orders.filter(x=>x.st==='proses'&&x.t<o.t).length*3+5;
 function toast(t){const e=$('toast');e.textContent=t;e.classList.add('s');clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove('s'),2600)}
 function beep(){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.value=.1;o.start();o.stop(c.currentTime+.2)}catch(e){}}
 function triggerOrderAlert(){toast('🔔 Pesanan baru masuk!');beep();try{navigator.vibrate&&navigator.vibrate(200)}catch(e){}}

@@ -6,7 +6,7 @@ const left=m=>S.menuStock[m.id]||0;
 const myOrder=()=>S.orders.find(o=>o.id===my);
 function go(p){v.page=p;draw();scrollTo(0,0)}
 function renderBuyer(){if(!['qris','checkout'].includes(v.page))draw()}
-function draw(){$('app').innerHTML=`<a class="seller-fab" href="seller.html" title="Masuk sebagai Pedagang">👨‍🍳</a>`+page()}
+function draw(){$('app').innerHTML=page()}
 function chg(id,d){const m=MENU.find(x=>x.id===id),n=Math.max(0,Math.min(left(m),(v.cart[id]||0)+d));if(n)v.cart[id]=n;else delete v.cart[id];draw()}
 function shopBadge(){const s=S.shop;return s==='open'?'<span class="badge b-open">● Buka</span>':s==='pause'?'<span class="badge b-pause">⏸ Sibuk (Pause)</span>':'<span class="badge b-close">● Tutup</span>'}
 function hdr(t,back){return `<div class="top">${back?`<button class="ic" onclick="go('${back}')">‹</button>`:'<span class="ic g"></span>'}<b>${t}</b><span class="ic g"></span></div>`}
@@ -45,19 +45,22 @@ return hdr('Pembayaran Berhasil','splash')+`<div class="pad" style="padding-top:
 ${d?`<div class="done"><b>Pesananmu siap! 🎉</b>Sebutkan <b>${o.no}</b> dan nama <b>${esc(o.name)}</b> ke Baoy.</div>
 ${o.rating?`<div class="card" style="text-align:center;margin-top:12px"><b>Terima kasih atas ulasanmu 💛</b><div class="stars" style="pointer-events:none">${[1,2,3,4,5].map(n=>`<span class="star ${o.rating>=n?'on':''}">★</span>`).join('')}</div></div>`
 :`<div class="card" style="margin-top:12px"><b>Bagaimana pesananmu?</b><div class="stars">${[1,2,3,4,5].map(n=>`<button class="star ${v.rate>=n?'on':''}" onclick="v.rate=${n};draw()">★</button>`).join('')}</div><textarea rows="2" maxlength="160" oninput="v.rtext=this.value" placeholder="Tulis ulasan (opsional)">${esc(v.rtext)}</textarea><button class="btn" style="margin-top:12px" onclick="submitReview()">Kirim Ulasan</button></div>`}`
-:`<div class="est">⏳ Estimasi Siap: ~${estMin(o)} Menit</div><div class="card" style="text-align:center;margin-top:12px"><b>Baoy sedang menyiapkan pesananmu 🍳</b><br><small class="mute">Halaman ini terbarui otomatis. Santai dulu, nggak perlu antre.</small></div>`}
+:`<div class="est" id="eta">${etaText(o)}</div><div class="card" style="text-align:center;margin-top:12px"><b>Baoy sedang menyiapkan pesananmu 🍳</b><br><small class="mute">Halaman ini terbarui otomatis. Santai dulu, nggak perlu antre.</small></div>`}
 <div class="card" style="margin-top:12px"><b>Detail</b>${o.items.map(i=>`<div class="sum"><span>${i.q}× ${esc(i.n)}</span><span>${rp(i.q*i.p)}</span></div>`).join('')}
 ${o.notes?`<div class="warn" style="margin:8px 0">📝 ${esc(o.notes)}</div>`:''}
 <div class="sum"><span>Subtotal</span><span>${rp(o.subtotal)}</span></div><div class="sum"><span>Biaya layanan</span><span>${rp(o.adminFee)}</span></div><div class="sum t"><span>Total</span><span>${rp(o.total)}</span></div></div>
 <button class="btn" onclick="v.cart={};go('merch')">Pesan Lagi</button></div>`}
 return ''}
+// Estimasi diatur penjual; sebelum diatur pembeli hanya melihat status menunggu
+function etaText(o){if(!o.estAt)return '⏳ Penjual sedang menghitung estimasi…';const l=o.estAt-Date.now();return l<=0?'🍳 Segera siap, mohon tunggu sebentar':`⏳ Estimasi siap: ~${Math.ceil(l/60000)} menit lagi`}
+setInterval(()=>{const o=myOrder(),e=$('eta');if(e&&o&&v.page==='track'&&o.st==='proses')e.textContent=etaText(o)},1000);
 function toQris(){const n=v.name.trim(),ph=v.phone.replace(/\D/g,'');if(!n)return toast('Isi nama dulu ya 🙂');if(ph.length<9)return toast('Nomor telepon belum valid');v.lastAmt=sub()+ADMIN_FEE;v.exp=Date.now()+300000;go('qris')}
 function pay(){S=loadStore();if(S.shop!=='open'){toast('Baoy baru saja menjeda pesanan');return go('menu')}
 const it=MENU.filter(m=>v.cart[m.id]),bad=it.find(m=>left(m)<v.cart[m.id]);
 if(bad){toast('Stok '+bad.n+' tidak cukup');return go('menu')}
 it.forEach(m=>S.menuStock[m.id]-=v.cart[m.id]);
-const no='A-'+String(++S.seq).padStart(3,'0'),s=sub(),ahead=S.orders.filter(x=>x.st==='proses').length;
-const o={id:Date.now(),no,name:v.name.trim(),phone:v.phone,type:v.type,notes:v.notes.trim(),items:it.map(m=>({id:m.id,n:m.n,q:v.cart[m.id],p:m.p})),subtotal:s,adminFee:ADMIN_FEE,total:s+ADMIN_FEE,st:'proses',estMinutes:ahead*3+5,t:Date.now(),rating:null,reviewText:''};
+const no='A-'+String(++S.seq).padStart(3,'0'),s=sub();
+const o={id:Date.now(),no,name:v.name.trim(),phone:v.phone,type:v.type,notes:v.notes.trim(),items:it.map(m=>({id:m.id,n:m.n,q:v.cart[m.id],p:m.p})),subtotal:s,adminFee:ADMIN_FEE,total:s+ADMIN_FEE,st:'proses',estMinutes:null,estAt:null,t:Date.now(),rating:null,reviewText:''};
 S.orders.unshift(o);saveStore();my=o.id;try{localStorage.setItem(KM,o.id)}catch(e){}v.cart={};v.notes='';go('track')}
 function submitReview(){if(!v.rate)return toast('Pilih bintang dulu ⭐');S=loadStore();const o=myOrder();if(!o||o.rating)return;
 o.rating=v.rate;o.reviewText=v.rtext.trim();S.reviews.unshift({orderId:o.id,name:o.name,rating:o.rating,comment:o.reviewText,t:Date.now()});saveStore();v.rate=0;v.rtext='';toast('Terima kasih atas ulasanmu 💛');draw()}
